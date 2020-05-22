@@ -1,23 +1,25 @@
 # active-svg
 JavaScript library for enhancing SVG images
 
-The library provides extra functionality to SVG images by setting four types of shapes and adding associated behaviours:
+The library provides extra functionality to SVG images by defining four types of shapes and adding associated behaviours:
 
-displayX - define rectangular boundaries depending on the size of the SVG container size i.e. Thumb, Small, Medium and Large
-popup - shapes that are outside of the displays and move under a popuplink on click events
-popuplink - shapes that link to pupups
-maplink - link to another map. This link will load another map to replace the current within the same container.
+display[TSML] - define rectangular boundaries to be fit within the view depending on the size of the SVG container size i.e. Thumb, Small, Medium and Large
+popup     - shapes that are hidden and show upon clicking a popuplink
+popuplink - shapes that show pupups
+pagelink  - link to another SVG. It will load another SVG to replace the current one within the same container
 
-The different types of shapes have the following attributes:
+To use enhanced SVG files, need a repository of SVG file. The SVG files are identified by file name (svg id). The SVG will be loaded by the script within a container (DIV tag) and modified on-fly.
 
-< g data-asvg-display ='SMLT size' ... >
+To use the library, need to add the folowing code within a page:
+<link rel="stylesheet" type="text/css" href="./dist_css/boundle.production.min.css">
+<script> var ASVG_CONF={ repository:"./maps/" };</script>
+<script src="./dist_js/boundle.production.min.js"></script>
 
-< g data-asvg-popupid ='popup id' onclick="" ... >
-
-< g data-asvg-popuplink='popup id' onclick="handlePopupLinkClick(this);" ... >
-
-< g data-asvg-maplink ='map id' onclick="handleMapLinkClick(this);" ... >
-
-To include an active SVG inside a page, the following markup shall be used:
-
+Then, within the page can include enhanced SVG via the following code:
 < div data-asvg='svg id' ... >
+
+The different types of shapes within a SVG shall have the following attributes:
+< g data-asvg-display ='SMLT size' ... >
+< g data-asvg-popupid ='popup id' onclick="" ... >
+< g data-asvg-popuplink='popup id' onclick="handlePopupLinkClick(this);" ... >
+< g data-asvg-maplink ='map id' onclick="handleMapLinkClick(this);" ... >

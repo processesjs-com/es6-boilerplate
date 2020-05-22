@@ -1,0 +1,20 @@
+{
+	"name":"active-svg",
+	"version":"1.0.0",
+	"description":"JavaScript library for enhancing SVG images",
+	"author":"Vasil Nedev",
+	"license":"MIT",
+	"scripts":{
+
+	},
+	"dependencies": {
+		"whatwg-fetch": "3.0.0"
+	},
+	"devDependencies": {
+		"@babel/core": "7.9.6",
+		"@babel/cli": "7.8.4",
+		"@babel/register": "7.9.0",
+		"babel-loader": "8.1.0",
+		"babel-preset-latest-node": "4.1.0"
+	}
+}
