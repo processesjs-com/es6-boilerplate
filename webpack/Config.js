@@ -1,19 +1,20 @@
+import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 export default {
 	devtool : 'inline-source-map',
 	entry : {
-		vendor : './src/vendor',
-		main :   './src/main' 
+		vendor : path.resolve(__dirname,'src/vendor'),
+		main :   path.resolve(__dirname,'src/main') 
 	},
 	target : 'web',
 	output : {
-		path : './dist',
+		path : path.resolve(__dirname,'dist'),
 		filename : '[name].js'
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template : './src/index.html',
+			template : path.resolve(__dirname,'src/index.html'),
 			inject : true
 		})
 	]
