@@ -5,8 +5,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 console.log( gitBranch() )
 
 export default {
-	devtool : 'source-map',
-	mode:'development',
+	devtool : gitBranch() == 'master' ? 'source-map' : 'inline-source-map',
+	mode:     gitBranch() == 'master' ? 'production' : 'development',
 	entry : { 
 		main:   path.resolve( __dirname,'../src/main.js'),
 		vendor: path.resolve( __dirname,'../src/vendor.js')
