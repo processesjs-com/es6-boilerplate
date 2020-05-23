@@ -2,7 +2,7 @@ import path from 'path'
 import gitBranch from 'current-git-branch'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-console.log(gitBranch)
+console.log( gitBranch() )
 
 export default {
 	devtool : 'source-map',
