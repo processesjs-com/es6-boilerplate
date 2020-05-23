@@ -20,7 +20,6 @@
 		"babel-loader": "8.1.0",
 		"babel-preset-latest-node": "4.1.0",
 		"webpack": "4.43.0",
-		"webpack-dev-middleware": "3.7.2",
 		"html-webpack-plugin": "4.3.0",
 		"rimraf":"3.0.2"
 	}
