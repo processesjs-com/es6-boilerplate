@@ -6,8 +6,7 @@
 	"license":"MIT",
 	"babel":{ "presets":["latest-node"] },
 	"scripts":{
-		"prebuild" : "rimraf ./dist && mkdir dist",
-		"build"    : "babel-node ./webpack/build.js"
+		"dev" : "webpack --mode development"
 	},
 	"dependencies": {
 		"whatwg-fetch": "3.0.0"
@@ -20,6 +19,7 @@
 		"babel-preset-latest-node": "4.1.0",
 
 		"webpack": "4.43.0",
+		"webpack-cli": "3.3.11",
 		"css-loader": "3.5.3",
 		"babel-loader": "8.1.0",
 		"html-webpack-plugin": "4.3.0",

@@ -3,7 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 export default {
 	devtool : 'inline-source-map',
-	entry : [ path.resolve(__dirname,'src/main') ],
+	entry : [ path.resolve(__dirname,'src/index') ],
 	target : 'web',
 	output : {
 		path : path.resolve(__dirname,'dist'),

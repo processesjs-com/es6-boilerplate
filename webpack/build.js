@@ -5,8 +5,5 @@ webpack( Config ).run( (err,stats) => {
 	if(err){
 		console.error( err )
 		return 1
-	}else{ 
-		console.log( 'Webpack build complete!' )	
-		return 0 
-	}
+	}else{ return 0 }
 })
