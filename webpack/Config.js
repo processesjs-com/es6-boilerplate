@@ -6,7 +6,7 @@ export default {
 	noInfo : false,
 	entry : {
 		vendor : './src/vendor',
-		main : './src/main' 
+		main :   './src/main' 
 	},
 	target : 'web',
 	output : {
