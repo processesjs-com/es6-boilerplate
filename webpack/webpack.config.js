@@ -31,7 +31,7 @@ export default {
 				use: { loader: 'babel-loader' } 
 			},
 			{ 
-				test: /\.css/, 
+				test: /\.css$/, 
 				use: [ 
 					{ loader: MiniCssExtractPlugin.loader }, 
 					{ loader: 'css-loader' } 
