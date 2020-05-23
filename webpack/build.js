@@ -1,7 +1,7 @@
-import webpack from 'webpack'
-import Config from './Config'
+import webpack   from 'webpack'
+import devConfig from './webpack.config.dev'
 
-webpack( Config ).run( (err,stats) => {
+webpack( devConfig ).run( (err,stats) => {
 	if(err){
 		console.error( err )
 		return 1
