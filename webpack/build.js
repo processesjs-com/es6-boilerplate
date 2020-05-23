@@ -11,5 +11,5 @@ webpack( devConfig , (err,stats) => {
 
 	if( stats.hasErrors()   ) console.error( info.errors )
 	if( stats.hasWarnings() ) console.warn ( info.warnings )
-	console.log( info )
+	
 })

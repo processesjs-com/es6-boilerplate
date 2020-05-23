@@ -3,6 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 export default {
 	devtool : 'source-map',
+	mode:'production',
 	entry : { 
 		main:   path.resolve( __dirname,'../src/main.js'),
 		vendor: path.resolve( __dirname,'../src/vendor.js')
