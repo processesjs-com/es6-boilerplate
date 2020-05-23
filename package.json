@@ -23,7 +23,6 @@
 		"css-loader": "3.5.3",
 		"babel-loader": "8.1.0",
 		"html-webpack-plugin": "4.3.0",
-		"write-file-webpack-plugin": "4.5.1",
 
 		"rimraf":"3.0.2"
 	}

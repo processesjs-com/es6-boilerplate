@@ -1,5 +1,4 @@
 import path from 'path'
-import WriteFilePlugin from 'write-file-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 export default {
@@ -14,8 +13,7 @@ export default {
 		new HtmlWebpackPlugin({
 			template : 'src/index.html',
 			inject : true
-		}),
-		new WriteFilePlugin()
+		})
 	],
 	module: {
 		rules: [
