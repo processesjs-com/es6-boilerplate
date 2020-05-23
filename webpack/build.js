@@ -1,5 +1,5 @@
 import webpack from 'webpack'
-import Config from './webpack/Config'
+import Config from './Config'
 
 webpack( Config ).run( (err,stats) => {
 	if(err){
