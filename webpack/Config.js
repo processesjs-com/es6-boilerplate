@@ -8,7 +8,6 @@ export default {
 	target : 'web',
 	output : {
 		path : path.resolve(__dirname,'dist'),
-		publicPath : '/',
 		filename : 'main.js'
 	},
 	plugins: [
@@ -16,7 +15,6 @@ export default {
 			template : 'src/index.html',
 			inject : true
 		}),
-		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.UglifyJsPlugin()
 	],
 	module: {
