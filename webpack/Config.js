@@ -1,22 +1,23 @@
 import path from 'path'
+import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 export default {
 	devtool : 'inline-source-map',
-	entry : {
-		vendor : path.resolve(__dirname,'src/vendor'),
-		main   : path.resolve(__dirname,'src/main') 
-	},
+	entry : [ path.resolve(__dirname,'src/main') ],
 	target : 'web',
 	output : {
 		path : path.resolve(__dirname,'dist'),
-		filename : '[name].js'
+		publicPath : '/',
+		filename : 'main.js'
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template : 'src/index.html',
 			inject : true
-		})
+		}),
+		new webpack.optimize.DedupePlugin(),
+		new webpack.optimize.UglifyJsPlugin()
 	],
 	module: {
 		rules: [
