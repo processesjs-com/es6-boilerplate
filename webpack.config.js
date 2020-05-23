@@ -1,7 +1,7 @@
-import path from 'path'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-export default {
+module.exports = {
 	devtool : 'inline-source-map',
 	entry : [ path.resolve(__dirname,'src/index') ],
 	target : 'web',
@@ -21,4 +21,4 @@ export default {
 			{ test: /\.css/, use: 'css-loader' }
 		]
 	}
-}
+};
