@@ -1,8 +1,6 @@
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-console.log( path.resolve( __dirname,'../src/main.js') )
-
 export default {
 	devtool : 'source-map',
 	mode:'production',
@@ -23,7 +21,7 @@ export default {
 	],
 	module: {
 		rules: [
-			{ test: /\.js$/, exclude: /node_modules/, use: { loader: 'babel-loader' } }
+			{ test: /\.js$/, exclude: /node_modules/, use: { loader: 'babel-loader' } },
 			{ test: /\.css/, use: [ 'css-loader' , 'style-loader' ] }
 		]
 	}
