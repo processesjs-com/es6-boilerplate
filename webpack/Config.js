@@ -5,7 +5,7 @@ export default {
 	devtool : 'inline-source-map',
 	entry : {
 		vendor : path.resolve(__dirname,'src/vendor'),
-		main :   path.resolve(__dirname,'src/main') 
+		main   : path.resolve(__dirname,'src/main') 
 	},
 	target : 'web',
 	output : {
@@ -14,17 +14,14 @@ export default {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template : path.resolve(__dirname,'src/index.html'),
+			template : 'src/index.html',
 			inject : true
 		})
-	]
-/*	
-	,
+	],
 	module: {
 		loaders: [
 			{test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
 			{test: /\.css/, loaders: ['style','css']}
 		]
 	}
-*/
 }
