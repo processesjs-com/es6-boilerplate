@@ -20,7 +20,7 @@ export default {
 			inject : true
 		}),
 		new MiniCssExtractPlugin({
-			filename: './src/style.css'
+			filename: 'style.css'
 		 })
 	],
 	module: {
