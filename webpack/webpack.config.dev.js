@@ -1,6 +1,8 @@
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
+console.log( path.resolve( __dirname,'../src/main.js') )
+
 export default {
 	devtool : 'source-map',
 	mode:'development',
@@ -15,7 +17,7 @@ export default {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template : '../src/index.html',
+			template : './src/index.html',
 			inject : true
 		})
 	],
