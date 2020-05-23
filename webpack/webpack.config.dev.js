@@ -6,8 +6,8 @@ console.log( 'Path resolve:' + path.resolve( __dirname,'../src/main' ) )
 export default {
 	devtool : 'source-map',
 	entry : { 
-		main:   path.resolve( __dirname,'../src/main'),
-		vendor: path.resolve( __dirname,'../src/vendor')
+		main:   path.resolve( __dirname,'../src/main.js'),
+		vendor: path.resolve( __dirname,'../src/vendor.js')
 	},
 	target : 'web',
 	output : {
