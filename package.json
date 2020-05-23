@@ -5,8 +5,8 @@
 	"author":"Vasil Nedev",
 	"license":"MIT",
 	"scripts":{
-		"prebuild" : "rimraf ./dist && mkdir dist",
-		"build": "babel-node ./webpack/build.js"
+		"prebuild" : "./node_modules/.bin/rimraf ./dist && mkdir dist",
+		"build"    : "./node_modules/.bin/babel  ./webpack/build.js"
 	},
 	"dependencies": {
 		"whatwg-fetch": "3.0.0"
