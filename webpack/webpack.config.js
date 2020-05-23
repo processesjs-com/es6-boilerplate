@@ -1,9 +1,12 @@
 import path from 'path'
+import gitBranch from 'current-git-branch'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+
+console.log(gitBranch)
 
 export default {
 	devtool : 'source-map',
-	mode:'production',
+	mode:'development',
 	entry : { 
 		main:   path.resolve( __dirname,'../src/main.js'),
 		vendor: path.resolve( __dirname,'../src/vendor.js')

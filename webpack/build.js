@@ -1,7 +1,7 @@
 import webpack   from 'webpack'
-import devConfig from './webpack.config.dev'
+import wpConfig from './webpack.config'
 
-webpack( devConfig , (err,stats) => {
+webpack( wpConfig , (err,stats) => {
 	if(err){
 		console.error( err )
 		return 1
