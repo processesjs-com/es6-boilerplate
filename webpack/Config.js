@@ -1,5 +1,5 @@
 import path from 'path'
-import webpack from 'webpack'
+import WriteFilePlugin from 'write-file-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 export default {
@@ -15,7 +15,7 @@ export default {
 			template : 'src/index.html',
 			inject : true
 		}),
-		new webpack.optimize.UglifyJsPlugin()
+		new WriteFilePlugin()
 	],
 	module: {
 		rules: [
