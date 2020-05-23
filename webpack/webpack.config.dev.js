@@ -1,8 +1,6 @@
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-console.log( 'Path resolve:' + path.resolve( __dirname,'../src/main' ) )
-
 export default {
 	devtool : 'source-map',
 	entry : { 

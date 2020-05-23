@@ -4,7 +4,7 @@
 	"description":"JavaScript library for enhancing SVG images",
 	"author":"Vasil Nedev",
 	"license":"MIT",
-	"babel":{ "presets":["latest-node"] },
+	"babel":{ "presets": ["latest-node"] },
 	"scripts":{
 		"build" : "babel-node webpack/build.js"
 	},

@@ -1,9 +1,15 @@
 import webpack   from 'webpack'
 import devConfig from './webpack.config.dev'
 
-webpack( devConfig ).run( (err,stats) => {
+webpack( devConfig , (err,stats) => {
 	if(err){
 		console.error( err )
 		return 1
-	}else{ return 0 }
+	}
+
+	const info = stats.toJson()
+
+	if( stats.hasErrors()   ) console.error( info.errors )
+	if( stats.hasWarnings() ) console.warn ( info.warnings )
+	console.log( info )
 })
