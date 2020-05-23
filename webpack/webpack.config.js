@@ -1,5 +1,6 @@
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
 export default {
 	devtool : 'source-map',
@@ -17,7 +18,10 @@ export default {
 		new HtmlWebpackPlugin({
 			template : './src/index.html',
 			inject : true
-		})
+		}),
+		new MiniCssExtractPlugin({
+			filename: './src/style.css'
+		 })
 	],
 	module: {
 		rules: [
@@ -28,7 +32,10 @@ export default {
 			},
 			{ 
 				test: /\.css/, 
-				use: { loader: 'css-loader' } 
+				use: [ 
+					{ loader: MiniCssExtractPlugin.loader }, 
+					{ loader: 'css-loader' } 
+				]
 			}
 		]
 	}
