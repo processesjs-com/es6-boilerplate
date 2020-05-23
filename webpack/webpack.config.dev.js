@@ -5,7 +5,7 @@ console.log( path.resolve( __dirname,'../src/main.js') )
 
 export default {
 	devtool : 'source-map',
-	mode:'development',
+	mode:'production',
 	entry : { 
 		main:   path.resolve( __dirname,'../src/main.js'),
 		vendor: path.resolve( __dirname,'../src/vendor.js')
@@ -24,7 +24,7 @@ export default {
 	module: {
 		rules: [
 			{ test: /\.js$/, exclude: /node_modules/, use: { loader: 'babel-loader' } }
-			// { test: /\.css/, use: [ 'css-loader' , 'style-loader' ] }
+			{ test: /\.css/, use: [ 'css-loader' , 'style-loader' ] }
 		]
 	}
 }
