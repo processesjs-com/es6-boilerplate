@@ -5,7 +5,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 export default {
 	devtool : 'source-map',
 	mode:     'production',
-	entry : { 
+	entry : {
 		main:   path.resolve( __dirname,'../src/main.js'),
 		vendor: path.resolve( __dirname,'../src/vendor.js')
 	},
@@ -16,6 +16,7 @@ export default {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
+      title : 'Front end boilerplate'
 			template : './src/index.html',
 			inject : true
 		}),
@@ -25,16 +26,16 @@ export default {
 	],
 	module: {
 		rules: [
-			{ 
-				test: /\.js$/, 
-				exclude: /node_modules/, 
-				use: { loader: 'babel-loader' } 
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: { loader: 'babel-loader' }
 			},
-			{ 
-				test: /\.css$/, 
-				use: [ 
-					{ loader: MiniCssExtractPlugin.loader }, 
-					{ loader: 'css-loader' } 
+			{
+				test: /\.css$/,
+				use: [
+					{ loader: MiniCssExtractPlugin.loader },
+					{ loader: 'css-loader' }
 				]
 			}
 		]

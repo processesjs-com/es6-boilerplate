@@ -1,3 +1,3 @@
 import './style.css'
 
-window.document.getElementById('greeting').innerHTML = '<h1>Hello World :)</h1>'
+window.document.getElementById('app').innerHTML = '<h1>Hello World :)</h1>'
