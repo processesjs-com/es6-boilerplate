@@ -5,6 +5,7 @@ import gitBranchName        from 'git-branch-name'
 import HtmlWebpackPlugin    from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
+// Set development parameters if not in master branch
 let devtool = 'source-map'
 let mode    = 'production'
 if( gitBranchName != 'master' ){
@@ -12,6 +13,7 @@ if( gitBranchName != 'master' ){
   mode    = 'development'
 }
 
+// Recreate the dist directory
 const distPath = path.resolve( __dirname,'../dist')
 console.log( 'Dist path:' + distPath )
 rimraf.sync(  distPath )
