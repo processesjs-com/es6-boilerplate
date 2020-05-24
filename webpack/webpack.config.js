@@ -16,7 +16,7 @@ export default {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-      title : 'Front end boilerplate'
+      title : 'Front end boilerplate',
 			template : './src/index.html',
 			inject : true
 		}),
