@@ -1,5 +1,6 @@
-# Distribution
+# Custome (VN May 2020)
 dist
+package-lock.json
 
 # Logs
 logs
