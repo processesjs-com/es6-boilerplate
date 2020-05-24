@@ -1,22 +1,20 @@
 import path   from 'path'
 import fs     from 'fs'
 import rimraf from 'rimraf'
-import gitBranchName        from 'git-branch-name'
+import gitBranch            from 'current-git-branch'
 import HtmlWebpackPlugin    from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
-// Set development parameters if not in master branch
+// Set development parameters
 let devtool = 'inline-source-map'
 let mode    = 'development'
-console.log( 'Branch name: '+gitBranchName() )
-if( gitBranchName() == 'master' ){
+if( gitBranch() == 'master' ){
   devtool = 'source-map'
   mode    = 'production'
 }
 
 // Recreate the dist directory
 const distPath = path.resolve( __dirname,'../dist')
-console.log('Dist path: ' + distPath )
 rimraf.sync(  distPath )
 fs.mkdirSync( distPath )
 
@@ -29,7 +27,7 @@ export default {
 	},
 	target : 'web',
 	output : {
-		path : path.resolve( __dirname,'../dist' ),
+		path : distPath,
 		filename : '[name].js'
 	},
 	plugins: [
