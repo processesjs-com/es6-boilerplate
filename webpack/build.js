@@ -1,5 +1,6 @@
-import webpack   from 'webpack'
-import wpConfig from './webpack.config'
+import gitBranchName from 'git-branch-name'
+import webpack       from 'webpack'
+import wpConfig      from './webpack.config'
 
 webpack( wpConfig , (err,stats) => {
 	if( err ){
@@ -11,6 +12,11 @@ webpack( wpConfig , (err,stats) => {
 	if( stats.hasWarnings() ) console.warn ( info.warnings )
   if( !stats.hasErrors() && !stats.hasWarnings() ){
     console.log( 'All looks OK!' )
+    if( gitBranchName() == 'master' ){
+      console.log('Development deployment. Branch ' + gitBranchName() )
+    }else{
+      console.log('Production deployment.')
+    }
     return 0
   }else{ return 1 }
 })

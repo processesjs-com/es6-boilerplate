@@ -6,16 +6,16 @@ import HtmlWebpackPlugin    from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
 // Set development parameters if not in master branch
-let devtool = 'source-map'
-let mode    = 'production'
-if( gitBranchName != 'master' ){
-  devtool = 'inline-source-map'
-  mode    = 'development'
+let devtool = 'inline-source-map'
+let mode    = 'development'
+console.log( 'Branch name: '+gitBranchName() )
+if( gitBranchName() == 'master' ){
+  devtool = 'source-map'
+  mode    = 'production'
 }
 
 // Recreate the dist directory
 const distPath = path.resolve( __dirname,'../dist')
-console.log( 'Dist path:' + distPath )
 rimraf.sync(  distPath )
 fs.mkdirSync( distPath )
 
