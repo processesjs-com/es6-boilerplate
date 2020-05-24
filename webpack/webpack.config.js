@@ -16,6 +16,7 @@ if( gitBranchName() == 'master' ){
 
 // Recreate the dist directory
 const distPath = path.resolve( __dirname,'../dist')
+console.log('Dist path: ' + distPath )
 rimraf.sync(  distPath )
 fs.mkdirSync( distPath )
 
@@ -23,12 +24,12 @@ export default {
 	devtool,
 	mode,
 	entry : {
-		main:   path.resolve( __dirname,'../src/main.js'),
-		vendor: path.resolve( __dirname,'../src/vendor.js')
+		main:   path.resolve( __dirname,'../src/main.js' ),
+		vendor: path.resolve( __dirname,'../src/vendor.js' )
 	},
 	target : 'web',
 	output : {
-		path : distPath,
+		path : path.resolve( __dirname,'../dist' ),
 		filename : '[name].js'
 	},
 	plugins: [
