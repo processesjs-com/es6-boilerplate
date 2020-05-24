@@ -9,7 +9,11 @@ webpack( wpConfig , (err,stats) => {
 	if( stats.hasWarnings() ) console.warn ( info.warnings )
   if( !stats.hasErrors() && !stats.hasWarnings() ){
     console.log( 'Build looks good!' )
-    console.log( 'gitBranch: ' + gitBranch() )
+    if( gitBranch() == 'master' ){
+      console.log('Production deployment')
+    }else if( gitBranch() ){
+      console.log('Development deployment. Branch: ' + gitBranch() )
+    }else{ console.error( 'Cant find git branch name!' ) }
     return 0
   }else{ return 1 }
 })

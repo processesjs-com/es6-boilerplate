@@ -13,23 +13,20 @@ if( gitBranch() == 'master' ){
   mode    = 'production'
 }
 
-// Recreate the dist directory
 const distPath = path.resolve( __dirname,'../dist')
+const main     = path.resolve( __dirname,'../src/main.js' )
+const vendor   = path.resolve( __dirname,'../src/vendor.js' )
+
+// Recreate the dist directory
 rimraf.sync(  distPath )
 fs.mkdirSync( distPath )
 
 export default {
 	devtool,
 	mode,
-	entry : {
-		main:   path.resolve( __dirname,'../src/main.js' ),
-		vendor: path.resolve( __dirname,'../src/vendor.js' )
-	},
+	entry : { main , vendor },
 	target : 'web',
-	output : {
-		path : distPath,
-		filename : '[name].js'
-	},
+	output : { path : distPath, filename : '[name].js' },
 	plugins: [
 		new HtmlWebpackPlugin({
       title : 'Front end boilerplate',
