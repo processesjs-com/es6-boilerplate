@@ -1,17 +1,32 @@
-import path from 'path'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
+import path   from 'path'
+import fs     from 'fs'
+import rimraf from 'rimraf'
+import gitBranchName        from 'git-branch-name'
+import HtmlWebpackPlugin    from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
+let devtool = 'source-map'
+let mode    = 'production'
+if( gitBranchName != 'master' ){
+  devtool = 'inline-source-map'
+  mode    = 'development'
+}
+
+const distPath = path.resolve( __dirname,'../dist')
+console.log( 'Dist path:' + distPath )
+rimraf.sync(  distPath )
+fs.mkdirSync( distPath )
+
 export default {
-	devtool : 'source-map',
-	mode:     'production',
+	devtool,
+	mode,
 	entry : {
 		main:   path.resolve( __dirname,'../src/main.js'),
 		vendor: path.resolve( __dirname,'../src/vendor.js')
 	},
 	target : 'web',
 	output : {
-		path : path.resolve( __dirname,'../dist'),
+		path : distPath,
 		filename : '[name].js'
 	},
 	plugins: [
