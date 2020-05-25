@@ -6,7 +6,7 @@
 	"license":"MIT",
 	"babel":{ "presets": ["latest-node"] },
 	"scripts":{
-		"build" : "babel-node webpack/build.js"
+		"build" : "babel-node tools/build.js"
 	},
 	"dependencies": {
 		"whatwg-fetch": "3.0.0"
