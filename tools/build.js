@@ -1,6 +1,23 @@
+import fs        from 'fs'
+import rimraf    from 'rimraf'
 import gitBranch from 'current-git-branch'
 import webpack   from 'webpack'
 import wpConfig  from './webpack.config'
+
+// Flush output path
+rimraf.sync(  wpConfig.output.path )
+fs.mkdirSync( wpConfig.output.path )
+
+// If master branch, set up for production
+if( gitBranch() == 'master' ){
+  wpConfig.devtool = 'source-map'
+  wpConfig.mode    = 'production'
+  process.env.NODE_ENV = 'production'
+  console.log('Building master branch in Production mode.' )
+}else{
+  process.env.NODE_ENV = 'development'
+  console.log('Building ' + gitBranch() + ' branch in Development mode.' )
+}
 
 webpack( wpConfig , (err,stats) => {
 	if( err ){ console.error( err ) ; return 1 }
@@ -12,7 +29,7 @@ webpack( wpConfig , (err,stats) => {
     if( gitBranch() == 'master' ){
       console.log('Production deployment')
     }else if( gitBranch() ){
-      console.log('Development deployment. Branch: ' + gitBranch() )
+      console.log('Development deployment of branch ' + gitBranch() )
     }else{ console.error( 'Cant find git branch name!' ) }
     return 0
   }else{ return 1 }
