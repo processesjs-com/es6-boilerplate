@@ -1,7 +1,7 @@
 {
-	"name":"active-svg",
+	"name":"es6-boilerplate",
 	"version":"1.0.0",
-	"description":"JavaScript library for enhancing SVG images",
+	"description":"ES6 application boilerplate",
 	"author":"Vasil Nedev",
 	"license":"MIT",
 	"babel":{ "presets": ["latest-node"] },
