@@ -6,6 +6,7 @@
 	"license":"MIT",
 	"babel":{ "presets": ["latest-node"] },
 	"scripts":{
+    "git-pull": "babel-node tools/git-pull.js",
 		"build" : "babel-node tools/build.js"
 	},
 	"dependencies": {
@@ -25,6 +26,7 @@
     "mini-css-extract-plugin": "0.9.0",
 
     "rimraf": "3.0.2",
-    "current-git-branch": "1.1.0"
+    "current-git-branch": "1.1.0",
+    "shelljs": "0.8.4"
 	}
 }

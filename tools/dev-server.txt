@@ -1,2 +1,4 @@
+To set up a mini Express server do these once on the building server.
+
 sudo docker pull tobilg/mini-webserver
 sudo docker run --name mini-web -p 3000:3000 -v /build:/app/public:ro -d tobilg/mini-webserver
