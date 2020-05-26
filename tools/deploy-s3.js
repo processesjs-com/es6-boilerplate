@@ -23,10 +23,13 @@ fs.readdir( path.resolve( __dirname , '../dist' ) , ( err , files ) => {
     if( err ){ console.log('Unable to scan directory: ' + err) ; return 1 }
     for( const file of files )
     {
+      console.log('Upload: ', file)
+      /*
       const uploadParams = { Bucket , Body:fs.createReadStream( file ) , Key:path.basename( file ) }
       s3.upload ( uploadParams , ( err , data ) => {
         if ( err )  { console.log( "Upload error: " , err ) ; return 1 }
         if ( data ) { console.log( "Upload Success: " , data.Location) }
       })
+      */
     }
 })
