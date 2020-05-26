@@ -6,27 +6,30 @@
 	"license":"MIT",
 	"babel":{ "presets": ["latest-node"] },
 	"scripts":{
-    "git-pull": "babel-node tools/git-pull.js",
-		"build" : "babel-node tools/build.js"
+    "prebuild": "babel-node tools/git-pull.js",
+    "build"   : "babel-node tools/build.js",
+    "deploy"  : "babel-node tools/deploy-s3.js"
 	},
 	"dependencies": {
 		"whatwg-fetch": "3.0.0"
 	},
 	"devDependencies": {
-		"@babel/core": "7.9.6",
-		"@babel/cli": "7.8.4",
-		"@babel/node": "7.8.7",
-		"@babel/register": "7.9.0",
-		"babel-preset-latest-node": "4.1.0",
+		"@babel/core": "^7.9.6",
+		"@babel/cli": "^7.8.4",
+		"@babel/node": "^7.8.7",
+		"@babel/register": "^7.9.0",
+		"babel-preset-latest-node": "^4.1.0",
 
-		"webpack": "4.43.0",
-		"babel-loader": "8.1.0",
-		"css-loader": "3.5.3",
-		"html-webpack-plugin": "4.3.0",
-    "mini-css-extract-plugin": "0.9.0",
+		"webpack": "^4.43.0",
+		"babel-loader": "^8.1.0",
+		"css-loader": "^3.5.3",
+		"html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.9.0",
 
-    "rimraf": "3.0.2",
-    "current-git-branch": "1.1.0",
-    "shelljs": "0.8.4"
+    "rimraf": "^3.0.2",
+    "current-git-branch": "^1.1.0",
+    "shelljs": "^0.8.4",
+
+    "aws-sdk": "^2.681.0"
 	}
 }
