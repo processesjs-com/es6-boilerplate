@@ -29,12 +29,15 @@ new Promise( ( res , rej ) => {
   })
 )
 .then( files => {
+  console.log(files)
+  /*
   Promise.all( files.map( file => { new Promise ( ( res , rej ) => {
     const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + file ) , Key: file }
     s3.upload ( uploadParams , ( err , data ) => {
       if( !err ){ console.log('Uploaded ', data.Location ) ; res() }else{ rej( err ) }
     })
   })}))
+  */
 })
 .catch( err => console.log( err ) )
 
