@@ -21,14 +21,11 @@ new Promise( ( res , rej ) => {
     })
   })}))
 })
-.then(
-  new Promise( ( res , rej ) => {
-    console.log(pathToDist)
-    fs.readdir( pathToDist , ( err , files ) => {
-      if( !err ){ console.log(files) ; res( files )}else{ rej( err ) }
-    })
-  })
-)
+.then( () => { return new Promise( ( res , rej ) => {
+  fs.readdir( pathToDist , ( err , files ) => {
+    if( !err ){ res( files )}else{ rej( err ) }
+  })})
+})
 .then( files => {
   console.log(files)
   /*
