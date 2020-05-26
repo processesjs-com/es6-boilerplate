@@ -21,7 +21,7 @@ listS3().then( items => {
       if( !err ){ resolve( item.Key )}else{ reject( err ) }
     })
   })}))
-})
+}).catch( err => console.log( err ) )
 
 
 /*
