@@ -15,7 +15,7 @@ new Promise( ( res , rej ) => {
   })
 })
 .then( items => {
-  Promise.all( items.map( item => { new Promise( ( res , rej ) => {
+  Promise.all( items.map( item => { return new Promise( ( res , rej ) => {
     s3.deleteObject( { Bucket , Key: item.Key } , ( err , data ) => {
       if( !err ){ console.log( 'Deleted ', item.Key ) ; res() }else{ rej( err ) }
     })
@@ -27,7 +27,7 @@ new Promise( ( res , rej ) => {
   })})
 })
 .then( files => {
-  Promise.all( files.map( file => { new Promise ( ( res , rej ) => {
+  Promise.all( files.map( file => { return new Promise ( ( res , rej ) => {
     const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + file ) , Key: file }
     s3.upload ( uploadParams , ( err , data ) => {
       if( !err ){ console.log('Uploaded ', data.Location ) ; res() }else{ rej( err ) }
@@ -35,30 +35,3 @@ new Promise( ( res , rej ) => {
   })}))
 })
 .catch( err => console.log( err ) )
-
-
-/*
-
-s3.listObjects( { Bucket } , ( err , data ) => {
-  if (err) { console.log( "Error listing bucket objects: ", err ) ; return }
-  for( const item of data.Contents ){
-    s3.deleteObject( { Bucket , Key: item.Key } , ( err , data ) => {
-      if ( err ) { console.log( "Delete err: ", err ) ; return }
-      else { console.log("Deleted: ", item.Key ) }
-    })
-  }
-})
-
-fs.readdir( pathToDist , ( err , files ) => {
-    if( err ){ console.log('Unable to scan directory: ' + err) ; return }
-    for( const file of files )
-    {
-      const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + file ) , Key: file }
-      s3.upload ( uploadParams , ( err , data ) => {
-        if ( err )  { console.log( "Upload error: " , err ) ; return }
-        if ( data ) { console.log( "Uploaded : " , data.Location) }
-      })
-    }
-})
-
-*/
