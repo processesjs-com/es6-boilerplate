@@ -1,8 +1,12 @@
 import fs   from 'fs'
 import path from 'path'
 import AWS  from 'aws-sdk'
+import gitBranch from 'current-git-branch'
 
+const pathToDist = path.resolve( __dirname , '../dist' )
 const Bucket = 'es6-boilerplate'
+
+if( gitBranch()!='master '){ console.log( 'Please deploy from master branch only.' ) ; return 1 }
 
 AWS.config.update({region: 'eu-central-1'})
 const s3 = new AWS.S3()
@@ -19,7 +23,6 @@ s3.listObjects( { Bucket } , ( err , data ) => {
 })
 
 // Copy dist folder to the bucket
-const pathToDist = path.resolve( __dirname , '../dist' )
 fs.readdir( pathToDist , ( err , files ) => {
     if( err ){ console.log('Unable to scan directory: ' + err) ; return 1 }
     for( const file of files )
@@ -27,7 +30,7 @@ fs.readdir( pathToDist , ( err , files ) => {
       const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + file ) , Key: file }
       s3.upload ( uploadParams , ( err , data ) => {
         if ( err )  { console.log( "Upload error: " , err ) ; return 1 }
-        if ( data ) { console.log( "Upload Success: " , data.Location) }
+        if ( data ) { console.log( "Uploaded : " , data.Location) }
       })
     }
 })
