@@ -23,8 +23,9 @@ new Promise( ( res , rej ) => {
 })
 .then(
   new Promise( ( res , rej ) => {
+    console.log(pathToDist)
     fs.readdir( pathToDist , ( err , files ) => {
-      if( !err ){ res( files )}else{ rej( err ) }
+      if( !err ){ console.log(files) ; res( files )}else{ rej( err ) }
     })
   })
 )
