@@ -21,12 +21,13 @@ new Promise( ( res , rej ) => {
     })
   })}))
 })
-.then( () => return
-new Promise( ( res , rej ) => {
-  fs.readdir( pathToDist , ( err , files ) => {
-    if( !err ){ res( files )}else{ rej( err ) }
+.then( () => { return
+  new Promise( ( res , rej ) => {
+    fs.readdir( pathToDist , ( err , files ) => {
+      if( !err ){ res( files )}else{ rej( err ) }
+    })
   })
-}))
+})
 .then( files => {
   Promise.all( files.map( file => { new Promise ( ( res , rej ) => {
     const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + file ) , Key: file }
