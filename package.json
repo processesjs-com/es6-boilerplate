@@ -6,7 +6,7 @@
 	"license":"MIT",
 	"babel":{ "presets": ["latest-node"] },
 	"scripts":{
-    "git-pull": "babel-node tools/git-pull.js",
+    "prebuild": "babel-node tools/git-pull.js",
 		"build" : "babel-node tools/build.js"
 	},
 	"dependencies": {
