@@ -9,19 +9,35 @@ const Bucket = 'es6-boilerplate'
 AWS.config.update({region: 'eu-central-1'})
 const s3 = new AWS.S3()
 
-const listS3 = () => new Promise( ( resolve , reject ) => {
+const listS3 = new Promise( ( resolve , reject ) => {
   s3.listObjects( { Bucket } , ( err , data ) => {
     if( !err ){ resolve( data.Contents )}else{ reject( err ) }
   })
 })
+const listDist = new Promise( ( resolve , reject ) => {
+  fs.readdir( pathToDist , ( err , files ) => {
+    if( !err ){ resolve( files )}else{ reject( err ) }
+  })
+})
 
-listS3().then( items => {
-  Promise.all( items.map( item => { new Promise( (resolve , reject ) => {
+listS3
+.then( items => {
+  Promise.all( items.map( item => { new Promise( ( resolve , reject ) => {
     s3.deleteObject( { Bucket , Key: item.Key } , ( err , data ) => {
-      if( !err ){ resolve( item.Key )}else{ reject( err ) }
+      if( !err ){ console.log( 'Deleted ', item.Key ) ; resolve() }else{ reject( err ) }
     })
   })}))
-}).catch( err => console.log( err ) )
+})
+.listDist
+.then( files => {
+  Promise.all( files.map( file => { new Promise ( ( resolve , reject ) => {
+    const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + file ) , Key: file }
+    s3.upload ( uploadParams , ( err , data ) => {
+      if( !err ){ console.log('Uploaded ', data.Location ) ; resolve() }else{ reject( err ) }
+    })
+  })}))
+})
+.catch( err => console.log( err ) )
 
 
 /*
