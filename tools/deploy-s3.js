@@ -15,7 +15,7 @@ new Promise( ( res , rej ) => {
   })
 })
 .then( items => {
-  Promise.all( items.map( item => { return new Promise( ( res , rej ) => {
+  return Promise.all( items.map( item => { return new Promise( ( res , rej ) => {
     s3.deleteObject( { Bucket , Key: item.Key } , ( err , data ) => {
       if( !err ){ console.log( 'Deleted ', item.Key ) ; res() }else{ rej( err ) }
     })
@@ -27,7 +27,7 @@ new Promise( ( res , rej ) => {
   })})
 })
 .then( files => {
-  Promise.all( files.map( file => { return new Promise ( ( res , rej ) => {
+  return Promise.all( files.map( file => { return new Promise ( ( res , rej ) => {
     const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + file ) , Key: file }
     s3.upload ( uploadParams , ( err , data ) => {
       if( !err ){ console.log('Uploaded ', data.Location ) ; res() }else{ rej( err ) }
