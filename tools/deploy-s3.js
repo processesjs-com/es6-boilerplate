@@ -42,6 +42,5 @@ const s3 = new AWS.S3()
   })
   .then( files => console.log ( files ) )
   .catch( err => console.log( err ) )
-  console.log( buildFiles )
 
 // }else{ console.log( 'Deployment must be done only from \'master\' branch.' ) }
