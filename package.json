@@ -8,7 +8,7 @@
 	"scripts":{
     "prebuild"  : "babel-node tools/git-pull.js",
     "build"     : "babel-node tools/build.js",
-    "postbuild" : "babel-node tools/git-post.js",
+    "postbuild" : "babel-node tools/git-push.js",
     "deploy"    : "babel-node tools/deploy-s3.js"
 	},
 	"dependencies": {
