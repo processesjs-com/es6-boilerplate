@@ -38,4 +38,4 @@ if( gitBranch()=='master' ){
   })
   .catch( err => console.log( err  ) )
 
-}else{ console.log( 'Deployment is must be done only from \'master\' branch!' )}
+}else{ console.log( 'Deployment must be done only from \'master\' branch!' )}
