@@ -1,3 +1,4 @@
 import './style.css'
+import app from './index.js'
 
-window.document.getElementById('app').innerHTML = '<h1>Hello World :)</h1>'
+app.run()
