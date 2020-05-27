@@ -12,30 +12,30 @@ const s3 = new AWS.S3()
 if( gitBranch()=='master' ){
 
   new Promise( ( res , rej ) => {
-    s3.listObjects( { Bucket } , ( err , data ) => {
-      if( !err ){ res( data.Contents )}else{ rej( err ) }
+    fs.readdir( pathToDist , ( err , filenamesToUpload ) => { if( !err ){ res( filenamesToUpload )}else{ rej( err ) }})
+  })
+  .then( filenamesToUpload => {
+    return Promise.all( filenamesToUpload.map( filenameToUpload => { return new Promise ( ( res , rej ) => {
+      const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + filenameToUpload ) , Key: filenameToUpload }
+      s3.upload ( uploadParams , ( err , uploadedFile ) => {
+        if( !err ){ console.log('Uploaded ', uploadedFile.Key ) ; res( uploadedFile.Key ) }else{ rej( err ) }
+      })
+    })}))
+  })
+  .then( uploadedFilekeys => {
+    return new Promise( ( res , rej ) => {
+      s3.listObjects( { Bucket } , ( err , bucketFiles ) => {
+        if( !err ){ res( bucketFiles.Contents.filter( bucketFile => !uploadedFilekeys.includes( bucketFile.Key ) ) )}else{ rej( err ) }
+      })
     })
   })
-  .then( items => {
-    return Promise.all( items.map( item => { return new Promise( ( res , rej ) => {
-      s3.deleteObject( { Bucket , Key: item.Key } , ( err , data ) => {
-        if( !err ){ console.log( 'Deleted ', item.Key ) ; res() }else{ rej( err ) }
+  .then( filesToDelete => {
+    return Promise.all( filesToDelete.map( fileToDelete => { return new Promise( ( res , rej ) => {
+      s3.deleteObject( { Bucket , Key: fileToDelete.Key } , ( err , data ) => {
+        if( !err ){ console.log( 'Deleted ', fileToDelete.Key ) ; res( ) }else{ rej( err ) }
       })
     })}))
   })
-  .then( () => { return new Promise( ( res , rej ) => {
-    fs.readdir( pathToDist , ( err , files ) => {
-      if( !err ){ res( files )}else{ rej( err ) }
-    })})
-  })
-  .then( files => {
-    return Promise.all( files.map( file => { return new Promise ( ( res , rej ) => {
-      const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + file ) , Key: file }
-      s3.upload ( uploadParams , ( err , data ) => {
-        if( !err ){ console.log('Uploaded ', data.Location ) ; res() }else{ rej( err ) }
-      })
-    })}))
-  })
-  .catch( err => console.log( err ) )
+  .catch( err => console.log( err  ) )
 
-}else{ console.log( 'Deployment must be done only from \'master\' branch.' ) }
+}else{ console.log( 'Deployment must be done only from \'master\' branch!' )}
