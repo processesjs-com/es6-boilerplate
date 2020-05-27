@@ -15,10 +15,10 @@ const s3 = new AWS.S3()
     fs.readdir( pathToDist , ( err , filesToUpload ) => { if( !err ){ res( filesToUpload )}else{ rej( err ) }})
   })
   .then( filesToUpload => {
-    return Promise.all( filesToUpload.map( localFile => { return new Promise ( ( res , rej ) => {
-      const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + localFile ) , Key: localFile }
+    return Promise.all( filesToUpload.map( fileToUpload => { return new Promise ( ( res , rej ) => {
+      const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + fileToUpload ) , Key: fileToUpload }
       s3.upload ( uploadParams , ( err , uploadedFile ) => {
-        if( !err ){ console.log('Uploaded ', uploadedFile.Location ) ; res( uploadedFile.Location ) }else{ rej( err ) }
+        if( !err ){ console.log('Uploaded ', uploadedFile ) ; res( fileToUpload ) }else{ rej( err ) }
       })
     })}))
   })
