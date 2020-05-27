@@ -23,7 +23,7 @@ const s3 = new AWS.S3()
   })
   .then( uploadedFiles => { return new Promise( ( res , rej ) => {
     s3.listObjects( { Bucket } , ( err , bucketFiles ) => {
-      if( !err ){ res( bucketFiles.Contents.filter( file => !uploadedFiles.includes( file ) ) )}else{ rej( err ) }
+      if( !err ){ res( bucketFiles.Contents.filter( file => !uploadedFiles.includes( file.Key ) ) )}else{ rej( err ) }
     })
   })})
   .then( filesToDelete => console.log( filesToDelete) )
