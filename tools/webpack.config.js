@@ -6,8 +6,8 @@ export default {
 	devtool : 'inline-source-map',
 	mode    : 'development',
 	entry   : {
-    main  : path.resolve( __dirname,'../src/main.js' ),
-    vendor: path.resolve( __dirname,'../src/vendor.js' )
+    index : path.resolve( __dirname,'../src/index.js' ),
+    main  : path.resolve( __dirname,'../src/main.js' )
   },
 	target  : 'web',
 	output  : { path : path.resolve( __dirname,'../dist') , filename : '[name].js' },
