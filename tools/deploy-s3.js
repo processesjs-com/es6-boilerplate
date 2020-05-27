@@ -27,14 +27,16 @@ const s3 = new AWS.S3()
       if( !err ){ res( bucketFiles.Contents.filter( bucketFile => !uploadedFiles.includes( bucketFile.Key ) ) )}else{ rej( err ) }
     })
   })})
+  .then( filesToDelete => { console.log( filesToDelete )})
+  /*
   .then( filesToDelete => {
     return Promise.all( filesToDelete.map( fileToDelete => { return new Promise( ( res , rej ) => {
       s3.deleteObject( { Bucket , Key: fileToDelete.Key } , ( err , data ) => {
-        if( !err ){ console.log( 'Deleted ', fileToDelete.Key ) ; res( data ) }else{ rej( err ) }
+        if( !err ){ console.log( 'Deleted ', fileToDelete.Key ) ; res( ) }else{ rej( err ) }
       })
     })}))
   })
-  .then( data => console.log( data ) )
+  */
   .catch( err => console.log( err  ) )
 
 // })
