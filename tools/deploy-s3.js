@@ -12,29 +12,29 @@ const s3 = new AWS.S3()
 // if( gitBranch()=='master' ){
 
   new Promise( ( res , rej ) => {
-  fs.readdir( pathToDist , ( err , localFiles ) => { if( !err ){ res( localFiles )}else{ rej( err ) }})})
-  .then( localFiles => {
-    return Promise.all( localFiles.map( localFile => { return new Promise ( ( res , rej ) => {
+    fs.readdir( pathToDist , ( err , filesToUpload ) => { if( !err ){ res( filesToUpload )}else{ rej( err ) }})
+  })
+  .then( filesToUpload => {
+    return Promise.all( filesToUpload.map( localFile => { return new Promise ( ( res , rej ) => {
       const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + localFile ) , Key: localFile }
-      s3.upload ( uploadParams , ( err , data ) => {
-        if( !err ){ console.log('Uploaded ', data.Location ) ; res( localFile ) }else{ rej( err ) }
+      s3.upload ( uploadParams , ( err , uploadedFile ) => {
+        if( !err ){ console.log('Uploaded ', uploadedFile.Location ) ; res( uploadedFile.Location ) }else{ rej( err ) }
       })
     })}))
   })
   .then( uploadedFiles => { return new Promise( ( res , rej ) => {
     s3.listObjects( { Bucket } , ( err , bucketFiles ) => {
-      if( !err ){ res( bucketFiles.Contents.filter( file => !uploadedFiles.includes( file.Key ) ) )}else{ rej( err ) }
+      if( !err ){ res( bucketFiles.Contents.filter( bucketFile => !uploadedFiles.includes( bucketFile.Key ) ) )}else{ rej( err ) }
     })
   })})
-  .then( filesToDelete => console.log( filesToDelete) )
-  .catch( err => console.log( err ) )
+  .then( filesToDelete => {
+    return Promise.all( filesToDelete.map( fileToDelete => { return new Promise( ( res , rej ) => {
+      s3.deleteObject( { Bucket , Key: fileToDelete.Key } , ( err , data ) => {
+        if( !err ){ console.log( 'Deleted ', fileToDelete.Key ) ; res( data ) }else{ rej( err ) }
+      })
+    })}))
+  })
+  .then( data => console.log( data ) )
+  .catch( err => console.log( err  ) )
 
-// }else{ console.log( 'Deployment must be done only from \'master\' branch.' ) }
-/*
-.then( items => {
-  return Promise.all( items.map( item => { return new Promise( ( res , rej ) => {
-    s3.deleteObject( { Bucket , Key: item.Key } , ( err , data ) => {
-      if( !err ){ console.log( 'Deleted ', item.Key ) ; res() }else{ rej( err ) }
-    })
-  })}))
-})*/
+// })
