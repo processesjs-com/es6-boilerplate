@@ -11,6 +11,7 @@ const s3 = new AWS.S3()
 
 if( gitBranch()=='master' ){
 
+  /*
   new Promise( ( res , rej ) => {
     s3.listObjects( { Bucket } , ( err , data ) => {
       if( !err ){ res( data.Contents )}else{ rej( err ) }
@@ -23,19 +24,24 @@ if( gitBranch()=='master' ){
       })
     })}))
   })
-  .then( () => { return new Promise( ( res , rej ) => {
+  .then( () => { return
+  */
+
+    new Promise( ( res , rej ) => {
     fs.readdir( pathToDist , ( err , files ) => {
       if( !err ){ res( files )}else{ rej( err ) }
     })})
-  })
+  // })
   .then( files => {
     return Promise.all( files.map( file => { return new Promise ( ( res , rej ) => {
       const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + file ) , Key: file }
       s3.upload ( uploadParams , ( err , data ) => {
-        if( !err ){ console.log('Uploaded ', data.Location ) ; res() }else{ rej( err ) }
+        if( !err ){ console.log('Uploaded ', data.Location ) ; res( file ) }else{ rej( err ) }
       })
     })}))
   })
+  .then( files => console.log ( files ) )
   .catch( err => console.log( err ) )
+  console.log( buildFiles )
 
 }else{ console.log( 'Deployment must be done only from \'master\' branch.' ) }
