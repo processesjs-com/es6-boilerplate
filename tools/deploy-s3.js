@@ -9,7 +9,7 @@ const Bucket = 'es6-boilerplate'
 AWS.config.update({region: 'eu-central-1'})
 const s3 = new AWS.S3()
 
-if( gitBranch()=='master' ){
+// if( gitBranch()=='master' ){
 
   /*
   new Promise( ( res , rej ) => {
@@ -44,4 +44,4 @@ if( gitBranch()=='master' ){
   .catch( err => console.log( err ) )
   console.log( buildFiles )
 
-}else{ console.log( 'Deployment must be done only from \'master\' branch.' ) }
+// }else{ console.log( 'Deployment must be done only from \'master\' branch.' ) }
