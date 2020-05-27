@@ -9,26 +9,26 @@ const Bucket = 'es6-boilerplate'
 AWS.config.update({region: 'eu-central-1'})
 const s3 = new AWS.S3()
 
-// if( gitBranch()=='master' ){
+if( gitBranch()=='master' ){
 
   new Promise( ( res , rej ) => {
-    fs.readdir( pathToDist , ( err , filesToUpload ) => { if( !err ){ res( filesToUpload )}else{ rej( err ) }})
+    fs.readdir( pathToDist , ( err , filenamesToUpload ) => { if( !err ){ res( filenamesToUpload )}else{ rej( err ) }})
   })
-  .then( filesToUpload => {
-    return Promise.all( filesToUpload.map( fileToUpload => { return new Promise ( ( res , rej ) => {
-      const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + fileToUpload ) , Key: fileToUpload }
+  .then( filenamesToUpload => {
+    return Promise.all( filenamesToUpload.map( filenameToUpload => { return new Promise ( ( res , rej ) => {
+      const uploadParams = { Bucket , Body: fs.createReadStream( pathToDist + '/' + filenameToUpload ) , Key: filenameToUpload }
       s3.upload ( uploadParams , ( err , uploadedFile ) => {
-        if( !err ){ console.log('Uploaded ', uploadedFile ) ; res( fileToUpload ) }else{ rej( err ) }
+        if( !err ){ console.log('Uploaded ', uploadedFile.Key ) ; res( uploadedFile.Key ) }else{ rej( err ) }
       })
     })}))
   })
-  .then( uploadedFiles => { return new Promise( ( res , rej ) => {
-    s3.listObjects( { Bucket } , ( err , bucketFiles ) => {
-      if( !err ){ res( bucketFiles.Contents.filter( bucketFile => !uploadedFiles.includes( bucketFile.Key ) ) )}else{ rej( err ) }
+  .then( uploadedFilekeys => {
+    return new Promise( ( res , rej ) => {
+      s3.listObjects( { Bucket } , ( err , bucketFiles ) => {
+        if( !err ){ res( bucketFiles.Contents.filter( bucketFile => !uploadedFilekeys.includes( bucketFile.Key ) ) )}else{ rej( err ) }
+      })
     })
-  })})
-  .then( filesToDelete => { console.log( filesToDelete )})
-  /*
+  })
   .then( filesToDelete => {
     return Promise.all( filesToDelete.map( fileToDelete => { return new Promise( ( res , rej ) => {
       s3.deleteObject( { Bucket , Key: fileToDelete.Key } , ( err , data ) => {
@@ -36,7 +36,6 @@ const s3 = new AWS.S3()
       })
     })}))
   })
-  */
   .catch( err => console.log( err  ) )
 
-// })
+}else{ console.log( 'Deployment is must be done only from \'master\' branch!' )}
